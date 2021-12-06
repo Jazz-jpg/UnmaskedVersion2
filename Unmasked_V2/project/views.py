@@ -1,4 +1,4 @@
-from cv2 import fastNlMeansDenoisingColoredMulti
+from cv2 import VideoCapture, fastNlMeansDenoisingColoredMulti
 from django.shortcuts import render, redirect#will render/show web files
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404,redirect  
@@ -11,7 +11,7 @@ from django.http import StreamingHttpResponse
 import cv2
 import threading
 
-#from project.Facial_Recog.facerecognizer import FaceRecognizer
+from project.Facial_Recog.facerecognizer import FaceRecognizer
 #Configuration for firebase database
 config = {
             "apiKey": "AIzaSyAxV8-iToKuLitUmG48EEkIddvq7iYrN2Y",
@@ -90,36 +90,14 @@ def manageStudents(request):
     return render(request, 'ManageStudents.html', {'students':all_students})
 #support page
 def startDetect(request):
-    #fr = FaceRecognizer()
-    #fr.startDetect()
-    class VideoCamera(object):
-        def __init__(self):
-            self.video = cv2.VideoCapture(0)
-            (self.grabbed, self.frame) = self.video.read()
-            threading.Thread(target=self.update, args=()).start()
-
-        def __del__(self):
-            self.video.release()
-
-        def get_frame(self):
-            image = self.frame
-            _, jpeg = cv2.imencode('.jpg', image)
-            return jpeg.tobytes()
-
-        def update(self):
-            while True:
-                (self.grabbed, self.frame) = self.video.read()
+    fr = FaceRecognizer()
+    
     def gen(camera):
         while True:
             frame = camera.get_frame()
-            yield(b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-    def livefe(request):
-        try:
-            cam = VideoCamera()
-            return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
-        except:  # This is bad! replace it with proper handling
-            pass
+            yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    
+    return StreamingHttpResponse(gen(fr.startDetect()), content_type = 'multipart/x-mixed-replace; boundary=frame')
 
 def support(request):
     return render(request, 'Support.html')

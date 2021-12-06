@@ -20,15 +20,15 @@ class FireBase:
             "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
         }
         self.cred_obj = firebase_admin.credentials.Certificate(
-            'C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
+            'C:/Users/PCAero/Desktop/FacialRecognition/facial-recongition-38069-firebase-adminsdk.json')
         self.default_app = firebase_admin.initialize_app(
             self.cred_obj, {'databaseURL': self.config["databaseURL"]})
 
         self.database = pyrebase.initialize_app(self.config)
         self.storage = self.database.storage()
         self.auth = self.database.auth()
-        self.path = "C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog"
-        
+        self.path = "C:/Users/PCAero/Desktop/FacialRecognition/"
+
     #uploads image to firebase storage and updates path of picture1 field for the user
     #automatically increments the picture field and adds the picture
     #def addUserPic(self, userid, my_image):
@@ -57,6 +57,21 @@ class FireBase:
                 break
         pictureCounter = self.lastOccurence(userid) + 1
         pictureStr = "picture" + str(pictureCounter)
+        name = pictureStr + userid + '_' + img[index+1::]
+
+        self.storage.child(name).put(img)
+        url = self.storage.child(name).path
+        ref = db.reference('/users/'+userid)
+        ref.update({pictureStr: url})
+
+    def addOffendingPic(self, userid, img):
+        index = 0
+        for i in range(len(img)-1, 0, -1):
+            if img[i] in "/":
+                index = i
+                break
+        pictureCounter = self.lastOccurence(userid) + 1
+        pictureStr = "offense" + str(pictureCounter)
         name = pictureStr + userid + '_' + img[index+1::]
 
         self.storage.child(name).put(img)
@@ -132,7 +147,8 @@ class FireBase:
             
         for i in list:          
             if os.path.exists(path+i):
-                print(i + " already exists.")
+                #print(i + " already exists.")
+                pass
             else:
                 print("Downloading: "+i)
                 self.storage.child(i).download(filename=path+i, path=path)
@@ -162,6 +178,14 @@ class FireBase:
         email = values["email"]
         return email
 
+    def getLastOffense(self, userid):
+        offenseCounter = self.lastOffenseOccurence(userid)
+        ref = db.reference('/users/' + userid + '/offense' + offenseCounter)
+        ref = ref.get()
+        im = Image.open(ref)
+        return im
+
+
 
     #retrieves the entire database of users and their pictures
     def getAllPictures(self):
@@ -171,6 +195,18 @@ class FireBase:
                
     def getPath(self):
         return self.path
+
+    def getUserID(self, name):
+        temp = self.getAllUserID()
+        for i in temp:
+            ref = db.reference('/users/' + i)
+            ref = ref.get()
+            fName = ref["f_name"]
+            lName = ref["l_name"]
+            fullName = fName + " " + lName
+            if name == fullName:
+                return i
+        return None
 
     # finds the how many pictures there are and returns the count
     def lastOccurence(self, userid):
@@ -189,5 +225,37 @@ class FireBase:
             return 0
         else:
             return int(count)
+
+    def lastOffenseOccurence(self, userid):
+        ref = db.reference('/users/'+userid)
+        temp = ref.get()
+        temp = json.dumps(temp)
+        index = temp.rfind('offense')
+        index = index+7
+
+        count = ""
+        for i in temp[index]:
+            if i.isnumeric():
+                count = count + i
+
+        if count == "":
+            return 0
+        else:
+            return int(count)
     
+    def iterateOffenses(self, userid):
+        ref = db.reference('/users/' + userid + '/offenses')
+        offenses = ref.get()
+        if offenses == None:
+            data = {"offenses": "1"}
+            self.changeUserData(userid, data)
+        else:
+            offenses = int(offenses)
+            offenses += 1
+            data = {"offenses": offenses}
+            self.changeUserData(userid, data)
+    
+    def resetOffenses(self, userid):
+        data = {"offenses": "0"}
+        self.changeUserData(userid, data)
 

@@ -1,13 +1,16 @@
-#Facial recognizing code
-import cv2 as cv
 import numpy as np
-
-
+import cv2 as cv
 import os
+import Detector
+from firebase import FireBase
+import sys
+
 class FaceRecognizer:
-    def __init__(self, path):
-        self.path = path
+    def __init__(self):
+        self.fire = FireBase()
+        self.path = self.fire.getPath()
         self.haar_cascade = cv.CascadeClassifier(self.path + '/haar_face.xml')
+        self.USERS = r'C:/Users/PCAero/Desktop/FacialRecognition/users'
         self.people = []
     
     def setPeople(self, list):
@@ -19,9 +22,27 @@ class FaceRecognizer:
         else:
             return True
 
-    def startDetect(self, img):
+    def startDetect(self):
         if self.checkParameters():
-            self.detect(img)
+            self.fire.getAllPictures()
+            users = self.fire.getAllNames()
+            self.setPeople(users)
+            self.compareUsers()
+            self.create_train(self.USERS)
+            while True:
+                try:
+                    Detector.capture()
+                    imgPath = self.path + "my-image.png"
+                    img = cv.imread(imgPath)
+                    name = self.detect(img)
+                    if name == None:
+                        print("Unknown entity")
+                    else:
+                        userid = self.fire.getUserID(name)
+                        self.fire.iterateOffenses(userid)
+                        #self.fire.addUserPic(userid, img)
+                except KeyboardInterrupt:
+                    break
         else:
             print("The people list is empty. Please run setPeople")
 
@@ -34,7 +55,7 @@ class FaceRecognizer:
 
         gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
         cv.imshow('Person', gray)
-
+        label = None
         faces_rect = self.haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=8)
         for (x, y, w, h) in faces_rect:
             faces_roi = gray[y:y+h, x:x+w]
@@ -46,10 +67,13 @@ class FaceRecognizer:
                     cv.FONT_HERSHEY_COMPLEX, 1.0, (0, 255, 0), thickness=2)
             cv.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), thickness=2)
         cv.imshow('Detected_Face', img)
-        cv.waitKey(0)
+        if label == None:
+            return None
+        return self.people[label]
+  
 
     def create_train(self, DIR):
-        haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_RecogFacialRecognition/haar_face.xml')
+        haar_cascade = cv.CascadeClassifier('C:/Users/PCAero/Desktop/FacialRecognition/haar_face.xml')
         features = []
         labels =[]
         #loop over every person in list
@@ -57,7 +81,7 @@ class FaceRecognizer:
             #grab path for each person file
             path = os.path.join(DIR, person)
             label = self.people.index(person)
-            
+            print(person)
             #Loop over every image in file
             for img in os.listdir(path):
                 img_path = os.path.join(path, img)
@@ -81,3 +105,17 @@ class FaceRecognizer:
         np.save('features.npy', features)
         np.save('labels.npy', labels)
 
+    def compareUsers(self):
+        users = self.fire.getAllNames()
+        usersdir = self.fire.getPath() + 'users/'
+        dirnames = next(os.walk(usersdir), (None, [], None))[1]
+        for i in dirnames:
+            if i not in users:
+                deleteddir = usersdir + i
+                filenames = next(os.walk(deleteddir), (None, None, []))[2]
+                for i in filenames:
+                    os.remove(deleteddir + '/' + i)
+                os.rmdir(deleteddir)
+        print("Updated /users/ directory!")
+                        
+                

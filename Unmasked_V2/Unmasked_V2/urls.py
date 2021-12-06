@@ -37,5 +37,5 @@ urlpatterns = [
     path ('ManageStudents', views.manageStudents, name="manageStudents"),
     path ('startDetect', views.startDetect, name="startDetect"),
     path ('Support', views.support, name="support"),
-    path ('Tips',views.tips,name='tips'),
+    path ('Tips',views.tips,name='tips')
 ]
