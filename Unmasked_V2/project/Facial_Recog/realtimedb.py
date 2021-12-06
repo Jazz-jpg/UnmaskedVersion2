@@ -12,7 +12,7 @@ import time
 fire = FireBase()
 fr = FaceRecognizer()
 ryanid = "G000001"
-path = "C:/Users/Gamer/Desktop/GitRipo/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog"
+path = "C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog"
 path = fire.getPath()
 fr = FaceRecognizer(path)
 # data = {
@@ -20,7 +20,7 @@ fr = FaceRecognizer(path)
 #    "l_name" : "Lu",
 # }
 #imgPath = path + "my-image.png"
-USERS = r'C:/Users/Gamer/Desktop/GitRipo/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog/users'
+USERS = r'C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
 
 # creates and uploads picture captured from detector.py
 #fire.createUser('G1111111', data)

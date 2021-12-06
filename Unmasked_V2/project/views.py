@@ -17,7 +17,7 @@ config = {
             "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
         }
 cred_obj = firebase_admin.credentials.Certificate(
-            'C:/Users/Gamer/Desktop/GitRipo/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
+            'C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
 default_app = firebase_admin.initialize_app(
             cred_obj, {'databaseURL': config["databaseURL"]})
 firebase=pyrebase.initialize_app(config)

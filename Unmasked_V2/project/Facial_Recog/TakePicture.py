@@ -3,7 +3,7 @@ import uuid
 import time
 import os, os.path
 from os import walk
-directory = 'C:/Users/Gamer/Desktop/FacialRecognition/PersonImages'
+directory = 'C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/bPersonImages'
 
 def BeginCapture():
     
