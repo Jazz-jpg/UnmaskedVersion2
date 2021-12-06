@@ -49,7 +49,7 @@ class FaceRecognizer:
         cv.waitKey(0)
 
     def create_train(self, DIR):
-        haar_cascade = cv.CascadeClassifier('C:/Users/PCAero/Desktop/FacialRecognition/haar_face.xml')
+        haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_RecogFacialRecognition/haar_face.xml')
         features = []
         labels =[]
         #loop over every person in list

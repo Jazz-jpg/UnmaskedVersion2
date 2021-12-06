@@ -5,7 +5,7 @@ import os
 import numpy as np
 #Utilizing opencv build in facial recognizer
 #make list of people in images manually
-DIR = r'C:/Users/justi\Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+DIR = r'C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
 #Base folder
 DIR = r'C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/TestingFaces'
 
