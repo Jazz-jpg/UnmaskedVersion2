@@ -6,7 +6,12 @@ from django.conf import settings
 import pyrebase 
 import firebase_admin
 from pyrebase.pyrebase import Firebase
+from django.views.decorators import gzip
+from django.http import StreamingHttpResponse
+import cv2
+import threading
 
+#from project.Facial_Recog.facerecognizer import FaceRecognizer
 #Configuration for firebase database
 config = {
             "apiKey": "AIzaSyAxV8-iToKuLitUmG48EEkIddvq7iYrN2Y",
@@ -18,7 +23,7 @@ config = {
             "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
         }
 cred_obj = firebase_admin.credentials.Certificate(
-            'C:/Users/Gamer/Desktop/GitRipo/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
+            'C:/Users/PCAero/Desktop/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
 default_app = firebase_admin.initialize_app(
             cred_obj, {'databaseURL': config["databaseURL"]})
 firebase=pyrebase.initialize_app(config)
@@ -51,7 +56,7 @@ def addStud(request):
     
     #Inserting data in firebase db
     data = {"email":email,"f_name":fName,"l_name":lName}
-    database.child("users").child(GrizzID).set(data)
+    database.child("users").child('Users/'+ GrizzID).set(data)
     
     #redirecting to manage student page
     return render(request, 'ManageStudents.html')
@@ -84,6 +89,38 @@ def manageStudents(request):
     all_students = database.child("users")
     return render(request, 'ManageStudents.html', {'students':all_students})
 #support page
+def startDetect(request):
+    #fr = FaceRecognizer()
+    #fr.startDetect()
+    class VideoCamera(object):
+        def __init__(self):
+            self.video = cv2.VideoCapture(0)
+            (self.grabbed, self.frame) = self.video.read()
+            threading.Thread(target=self.update, args=()).start()
+
+        def __del__(self):
+            self.video.release()
+
+        def get_frame(self):
+            image = self.frame
+            _, jpeg = cv2.imencode('.jpg', image)
+            return jpeg.tobytes()
+
+        def update(self):
+            while True:
+                (self.grabbed, self.frame) = self.video.read()
+    def gen(camera):
+        while True:
+            frame = camera.get_frame()
+            yield(b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    def livefe(request):
+        try:
+            cam = VideoCamera()
+            return StreamingHttpResponse(gen(cam), content_type="multipart/x-mixed-replace;boundary=frame")
+        except:  # This is bad! replace it with proper handling
+            pass
+
 def support(request):
     return render(request, 'Support.html')
 #Tips page

@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.urls import path,include 
 from django.conf import settings
 from django.conf.urls.static import static
-from project import views
+import project.views as views
 
 urlpatterns = [
     path ('firebaseTest', views.firebaseTest, name='test2'),
@@ -35,6 +35,7 @@ urlpatterns = [
     path ('Login', views.login, name="login"),
     path ('Logout', views.logout, name='logout'),
     path ('ManageStudents', views.manageStudents, name="manageStudents"),
+    path ('startDetect', views.startDetect, name="startDetect"),
     path ('Support', views.support, name="support"),
     path ('Tips',views.tips,name='tips'),
 ]
