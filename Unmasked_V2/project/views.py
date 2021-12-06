@@ -51,7 +51,7 @@ def addStud(request):
     
     #Inserting data in firebase db
     data = {"email":email,"f_name":fName,"l_name":lName}
-    database.child(GrizzID).set(data)
+    database.child("users").child(GrizzID).set(data)
     
     #redirecting to manage student page
     return render(request, 'ManageStudents.html')
