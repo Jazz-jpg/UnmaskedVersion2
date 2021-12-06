@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="eng" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students</title>
+<!--    <link rel="stylesheet" href="design.css">-->
+     <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+     </head>
+
+
+
+  <div class = "container">
+<nav class="navbar navbar-default">
+    <div class = "container">
+
+        <div>
+        <ul class="nav navbar-nav">
+            <li> <a href="AdminHome">HOME</a></li>
+            <li> <a href="ManageStudents" >Manage Students</a></li>
+            <li> <a href="alert">Alert Page</a></li>
+            <li> <a href="Tips">Tips and Tricks</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li> <a href="Logout" >Logout</a></li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+    </div>
+
+<body>
+
+
+<div class = "container">
+
+<div class = "row">
+
+    <div class = "col-md-offset-5">
+
+    <h4>List of Students </h4>
+   <a href = "Add">
+ <button type="button" class="btn btn-success">Add a Student</button>
+        </a>
+    </div>
+</div>
+<br>
+
+<div class = "container-fluid custom-container-table">
+
+
+
+    <div class = "row">
+        <table class = "table table-bordered table-light table-hover" id="Students-table">
+
+        <thead class="table-active">
+                      <tr>
+                        <th>Last Name</th>
+                        <th >First Name</th>
+                        <th>Email</th>
+                        <th>Picture </th>
+                        <th>Picture with mask</th>
+                        <th>Delete</th>
+                        <th>Update</th>
+                    </tr>
+            </thead>
+
+            <tbody>
+                
+                <tr class="table-light">
+                        <td scope="row">Hana</td>
+                        <td>Nancy</td>
+                        <td>nancyhana@oakland.edu</td>
+                    <td> <button type="button" class="btn btn-warning">View</button></td>
+                        <td> image with mask</td>
+                        <td> <button type="button" class="btn btn-danger"> X</button> </td>
+                          <td> <button type="button" class="btn btn-info"> X</button></td>
+                </tr>
+
+                 <tr class="table-light">
+                        <td scope="row">Reynolds</td>
+                        <td>Ryan</td>
+                        <td>rreynolds@yahoo.com</td>
+                        <td> <button type="button" class="btn btn-warning">View</button>
+
+
+
+
+
+
+                        </td>
+                        <td> image with mask</td>
+                     <td> <button type="button" class="btn btn-danger"> X</button></td>
+                          <td> <button type="button" class="btn btn-info"> X</button></td>
+                </tr>
+
+                <tr class="table-light">
+                        <td scope="row">Lu</td>
+                        <td>Andy</td>
+                        <td>andylu@oakland.edu</td>
+                        <td> <button type="button" class="btn btn-warning">View</button></td>
+                        <td> image with mask</td>
+                    <td> <button type="button" class="btn btn-danger"> X</button></td>
+                          <td> <button type="button" class="btn btn-info"> X</button></td>
+                </tr>
+
+                      <tr class="table-light">
+                        <td scope="row">Johansson</td>
+                        <td>Scarlett</td>
+                        <td>scarlettjohansson@gmail.com</td>
+                        <td> <button type="button" class="btn btn-warning">View</button></td>
+                        <td> image with mask</td>
+                          <td> <button type="button" class="btn btn-danger"> X</button></td>
+                          <td> <button type="button" class="btn btn-info"> X</button></td>
+                </tr>
+
+                   <tr class="table-light">
+                        <td scope="row">Knowles</td>
+                        <td>Beyonce</td>
+                        <td>beyonce1010@gmail.com</td>
+                        <td> <button type="button" class="btn btn-warning">View</button></td>
+                        <td> image with mask</td>
+                       <td> <button type="button" class="btn btn-danger"> X</button></td>
+                         <td> <button type="button" class="btn btn-info"> X</button></td>
+                </tr>
+
+                <tr class="table-light">
+                        <td scope="row">Afflek</td>
+                        <td>Ben</td>
+                        <td>benafflek@gmail.com</td>
+                        <td> <button type="button" class="btn btn-warning">View</button></td>
+                        <td> image with mask</td>
+                        <td> <button type="button" class="btn btn-danger"> X</button></td>
+
+
+                    <td> <button type="button" class="btn btn-info"> X</button></td>
+                </tr>
+                <tr>
+
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    </div>
+    </div>
+
+</body>
+
+</html>

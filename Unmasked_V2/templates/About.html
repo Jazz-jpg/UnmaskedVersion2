@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <title>About</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> </head>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header"> <a href="#" class="navbar-brand"><b>Unmasked</b></a> </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li> <a href="Home">HOME</a></li>
+                    <li> <a href="About">ABOUT</a></li>
+                    <li> <a href="Support">SUPPORT  </a> </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li> <a href="Login">LOGIN (Admin Only)</a> </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
++
+<body>
+    <div class="container">
+
+        <div class="row">
+                 <div>
+            <img src ="{% static 'img/maskrequired.png' %}" alt="required" style="float: left; ">
+    <br>
+            <h4>Our Purpose</h4>
+            <p>With the rampant spread of the delta variant, schools and communities are looking now more than ever to enforce social distancing and mask mandate, for the safety of their communities. Our goal was to create a facial recognition detection system that would detect people who are not wearing a mask in an effort to provide our users an effective method to enofore mask mandates. We hope schools will be able to use our software in conjunction with their camera systems to manage their students and maintain the mask mandate. </p>
+</div>
+            </div>
+
+      <div class ="row" style="margin-top: 50px">
+                <img src ="{% static 'img/model.png' %}" alt="required" style="float: right; margin-left: 10px; width: 400px;">
+                <h4> How Our Software Work</h4>
+                <p>
+                    Our software determines whether a person is wearing a mask using modern computer vision technology. If the software detects if a person is not wearing a mask, then the system will identify through the database. Our primary target for this particular software was for schools where their database consists of students including their personal information, email, and picture id. Therefore, once the system identifies the individual from school's database, an email will be sent to that individual with a warning and remind them about the mask manadate.
+                </p>
+            </div>
+
+             <div class="col-md-7 col-md-offset-3">
+                <h4 style = "text-align: center; margin-top: 50px;"> Meet Our Team!</h4>
+                <p> Nancy Hana
+                   <br>
+                   Rachel Yang
+                   <br>
+                   Jasmin Medic
+                   <br>
+                   Andy Lu
+                   <br>
+                   Justin Chorazyczewski
+
+                </p>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
