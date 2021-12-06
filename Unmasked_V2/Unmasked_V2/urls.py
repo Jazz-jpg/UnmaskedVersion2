@@ -26,6 +26,7 @@ urlpatterns = [
     path ('', views.index, name='test'), #Testing
     path ('About', views.about, name= 'about'),
     path ('Add', views.add,name="add"),
+    path ('addStud', views.addStud,name="addStud"),
     path ('AdminHome',views.adminHome, name= 'adminHome'),
     path ('alert',views.alert, name="alert"),
     path ('Contact',views.contact, name ='contact'),
@@ -36,6 +37,4 @@ urlpatterns = [
     path ('ManageStudents', views.manageStudents, name="manageStudents"),
     path ('Support', views.support, name="support"),
     path ('Tips',views.tips,name='tips'),
-    
-    path('studAdd', views.studAdd,name="studAdd"),
 ]
