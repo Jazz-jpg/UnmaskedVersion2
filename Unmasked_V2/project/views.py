@@ -4,37 +4,15 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404,redirect  
 from django.conf import settings
 import pyrebase 
-import firebase_admin
 from pyrebase.pyrebase import Firebase
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
 import cv2
 import threading
-
+import project.Facial_Recog.Detector as Detector 
 from project.Facial_Recog.facerecognizer import FaceRecognizer
 #Configuration for firebase database
-config = {
-            "apiKey": "AIzaSyAxV8-iToKuLitUmG48EEkIddvq7iYrN2Y",
-            "authDomain": "facial-recongition-38069.firebaseapp.com",
-            "databaseURL": "https://facial-recongition-38069-default-rtdb.firebaseio.com",
-            "projectId": "facial-recongition-38069",
-            "storageBucket": "facial-recongition-38069.appspot.com",
-            "messagingSenderId": "937313859878",
-            "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
-        }
-cred_obj = firebase_admin.credentials.Certificate(
-            'C:/Users/PCAero/Desktop/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
-default_app = firebase_admin.initialize_app(
-            cred_obj, {'databaseURL': config["databaseURL"]})
-firebase=pyrebase.initialize_app(config)
-authe = firebase.auth()
-database=firebase.database()
 
-#Testing db connection via getting an email from db to print      
-def firebaseTest(request):
-    name = database.child("users").child("G2356732").child("email").get().val()
-    name2 = database.child("users").child("G4589350").child("email").get().val()
-    return HttpResponse(name)
 #Test page 
 def index (request):
     return render(request, 'index.html')
@@ -48,6 +26,8 @@ def add(request):
 #Adds a student and then redirects to manage student page
 def addStud(request):
     #getting information
+    fr = FaceRecognizer()
+    database = fr.getDatabase()
     fName = request.GET['first-name']
     lName = request.GET['last-name']
     GrizzID = request.GET['Grizz-ID']
@@ -56,7 +36,7 @@ def addStud(request):
     
     #Inserting data in firebase db
     data = {"email":email,"f_name":fName,"l_name":lName}
-    database.child("users").child('Users/'+ GrizzID).set(data)
+    #database.child("users").child('Users/'+ GrizzID).set(data)
     
     #redirecting to manage student page
     return render(request, 'ManageStudents.html')
@@ -84,6 +64,9 @@ def logout(request):
 # manage student page
 # Looping through students in db and showing them 
 def manageStudents(request):
+    
+    fr = FaceRecognizer()
+    database = fr.getDatabase()
     #Currently not implemented into manage students
     #Is a dynamic list of all students in db
     all_students = database.child("users")
@@ -91,7 +74,6 @@ def manageStudents(request):
 #support page
 def startDetect(request):
     fr = FaceRecognizer()
-    
     def gen(camera):
         while True:
             frame = camera.get_frame()

@@ -21,13 +21,12 @@ class FireBase:
         }
         self.cred_obj = firebase_admin.credentials.Certificate(
             'C:/Users/PCAero/Desktop/FacialRecognition/facial-recongition-38069-firebase-adminsdk.json')
-        self.default_app = firebase_admin.initialize_app(
-            self.cred_obj, {'databaseURL': self.config["databaseURL"]})
+        self.default_app = firebase_admin.initialize_app(self.cred_obj, {'databaseURL': self.config["databaseURL"]})
 
         self.database = pyrebase.initialize_app(self.config)
         self.storage = self.database.storage()
         self.auth = self.database.auth()
-        self.path = "C:/Users/PCAero/Desktop/FacialRecognition/"
+        self.path = "C:/Users/PCAero/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/"
 
     #uploads image to firebase storage and updates path of picture1 field for the user
     #automatically increments the picture field and adds the picture

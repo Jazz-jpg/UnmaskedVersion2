@@ -22,7 +22,6 @@ from django.conf.urls.static import static
 import project.views as views
 
 urlpatterns = [
-    path ('firebaseTest', views.firebaseTest, name='test2'),
     path ('', views.index, name='test'), #Testing
     path ('About', views.about, name= 'about'),
     path ('Add', views.add,name="add"),

@@ -1,13 +1,31 @@
-import urllib
-
+"""
 import os
-from PIL import Image
-from facerecognizer import FaceRecognizer
-import cv2 as cv
-import TakePicture
-import Detector
-import time
+from os import walk
 
-fr = FaceRecognizer()
-# ctrl + C to quit program
-fr.startDetect()
+import firebase_admin
+from firebase import FireBase
+
+usersdir = 'C:/Users/PCAero/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/TestingFaces/'
+
+directories = next(os.walk(usersdir), (None, [], None))[1]
+counter = 0
+fb = FireBase()
+
+for i in directories:
+    userdir = usersdir + i
+    if i == "Validation":
+        pass
+    else:
+        spaceParser = i.find(" ")
+        f_name = i[:spaceParser]
+        l_name = i[spaceParser+1:]
+        filenames = next(os.walk(userdir), (None, None, []))[2]
+        gid = "G" + str(counter)
+        data = {"f_name": f_name, "l_name": l_name}
+        fb.createUser(gid, data)
+        for j in filenames:
+            pic = userdir + '/' + j
+            fb.addUserPic(gid, pic)
+        counter += 1
+
+"""

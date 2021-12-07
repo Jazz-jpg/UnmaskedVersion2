@@ -1,8 +1,8 @@
 import numpy as np
 import cv2 as cv
 import os
-import Detector
-from firebase import FireBase
+import project.Facial_Recog.Detector as Detector
+from project.Facial_Recog.firebase import FireBase
 import sys
 
 class FaceRecognizer:
@@ -10,9 +10,12 @@ class FaceRecognizer:
         self.fire = FireBase()
         self.path = self.fire.getPath()
         self.haar_cascade = cv.CascadeClassifier(self.path + '/haar_face.xml')
-        self.USERS = r'C:/Users/PCAero/Desktop/FacialRecognition/users'
+        self.USERS = r'C:/Users/PCAero/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+        
         self.people = []
     
+    def getDatabase(self):
+        return self.fire
     def setPeople(self, list):
         self.people = list
 
@@ -73,7 +76,7 @@ class FaceRecognizer:
   
 
     def create_train(self, DIR):
-        haar_cascade = cv.CascadeClassifier('C:/Users/PCAero/Desktop/FacialRecognition/haar_face.xml')
+        haar_cascade = cv.CascadeClassifier(self.path + 'haar_face.xml')
         features = []
         labels =[]
         #loop over every person in list
@@ -86,6 +89,7 @@ class FaceRecognizer:
             for img in os.listdir(path):
                 img_path = os.path.join(path, img)
                 img_array = cv.imread(img_path)
+                img_array = cv.convertFp16(img_array)
                 gray = cv.cvtColor(img_array, cv.COLOR_RGB2GRAY)
                 
                 faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=16)
