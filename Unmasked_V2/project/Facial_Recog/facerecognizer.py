@@ -43,7 +43,7 @@ class FaceRecognizer:
                     else:
                         userid = self.fire.getUserID(name)
                         self.fire.iterateOffenses(userid)
-                        #self.fire.addUserPic(userid, img)
+                        self.fire.addOffendingPic(userid, img)
                 except KeyboardInterrupt:
                     break
         else:
