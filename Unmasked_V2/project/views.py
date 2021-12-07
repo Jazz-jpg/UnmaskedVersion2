@@ -6,7 +6,7 @@ from django.conf import settings
 import pyrebase 
 import firebase_admin
 from pyrebase.pyrebase import Firebase
-
+from . import models
 #Configuration for firebase database
 config = {
             "apiKey": "AIzaSyAxV8-iToKuLitUmG48EEkIddvq7iYrN2Y",
@@ -88,12 +88,8 @@ def login(request):
 def logout(request):
     return render(request, 'LogoutPage.html')
 # manage student page
-# Looping through students in db and showing them 
-def manageStudents(request):
-    #Currently not implemented into manage students
-    #Is a dynamic list of all students in db
-    lName = database.child("users").get()
-    return render(request, 'ManageStudents.html', {'lName':lName})
+def manageStudents(request):  
+    return render(request, 'ManageStudents.html',)
 #support page
 def support(request):
     return render(request, 'Support.html')
