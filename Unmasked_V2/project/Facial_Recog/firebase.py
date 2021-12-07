@@ -6,6 +6,7 @@ import firebase_admin
 from firebase_admin import db
 import json
 from PIL import Image
+import random
 #import FaceRecognition as FR
 
 class FireBase:
@@ -50,13 +51,10 @@ class FireBase:
     #        ref.update({pictureStr: url})
     def addUserPic(self, userid, img):
         index = 0
-        for i in range(len(img)-1, 0, -1):
-            if img[i] in "/":
-                index = i
-                break
+        rint = random.random() * 10000
         pictureCounter = self.lastOccurence(userid) + 1
         pictureStr = "picture" + str(pictureCounter)
-        name = pictureStr + userid + '_' + img[index+1::]
+        name = userid + '_' + str(rint) + ".jpg"
 
         self.storage.child(name).put(img)
         url = self.storage.child(name).path
@@ -191,6 +189,7 @@ class FireBase:
         users = self.getAllUserID()
         for i in users:
             self.getUserPictures(i)
+        print("RETRIEVED ALL PICS!")
                
     def getPath(self):
         return self.path

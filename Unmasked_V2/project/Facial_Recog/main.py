@@ -10,6 +10,9 @@ usersdir = 'C:/Users/PCAero/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_
 directories = next(os.walk(usersdir), (None, [], None))[1]
 counter = 0
 fb = FireBase()
+#img = r"C:\Users\PCAero\Desktop\UnmaskedVersion2\Unmasked_V2\project\Facial_Recog\TestingFaces\Scarlett Johansson\MV5BMTM3OTUwMDYwNl5BMl5BanBnXkFtZTcwNTUyNzc3Nw@@._V1_.jpg"
+
+#fb.addUserPic('G3', img)
 
 for i in directories:
     userdir = usersdir + i
@@ -27,5 +30,4 @@ for i in directories:
             pic = userdir + '/' + j
             fb.addUserPic(gid, pic)
         counter += 1
-
 """

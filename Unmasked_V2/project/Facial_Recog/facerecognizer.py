@@ -89,7 +89,6 @@ class FaceRecognizer:
             for img in os.listdir(path):
                 img_path = os.path.join(path, img)
                 img_array = cv.imread(img_path)
-                img_array = cv.convertFp16(img_array)
                 gray = cv.cvtColor(img_array, cv.COLOR_RGB2GRAY)
                 
                 faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=16)
