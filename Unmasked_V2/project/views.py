@@ -18,7 +18,7 @@ config = {
             "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
         }
 cred_obj = firebase_admin.credentials.Certificate(
-            'C:/Users/Gamer/Desktop/GitRipo/Unmasked/Unmasked/unmasked_proj/unmasked_proj/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
+            'C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
 default_app = firebase_admin.initialize_app(
             cred_obj, {'databaseURL': config["databaseURL"]})
 firebase=pyrebase.initialize_app(config)
@@ -47,13 +47,24 @@ def addStud(request):
     lName = request.GET['last-name']
     GrizzID = request.GET['Grizz-ID']
     email = request.GET['Email']
-    #studPic = request.GET['student-pic']
     
-    #Inserting data in firebase db
-    data = {"email":email,"f_name":fName,"l_name":lName}
+    #Currently not implemented
+    #studPic = request.FILES('picture')
+    
+    #Must input grizzID or else will not be put into system
+    if (GrizzID or fName) == '':
+        return render(request, 'ManageStudents.html')
+    
+    data = {"email":email,"f_name":fName,"l_name":lName,}
     database.child("users").child(GrizzID).set(data)
-    
+        
     #redirecting to manage student page
+    return render(request, 'ManageStudents.html')
+#Deletes student from database
+def delStud(request):
+    return render(request, 'ManageStudents.html')
+#Updates studdent information
+def updateStud(request):
     return render(request, 'ManageStudents.html')
 #Admin homepage
 def adminHome(request):
@@ -81,8 +92,8 @@ def logout(request):
 def manageStudents(request):
     #Currently not implemented into manage students
     #Is a dynamic list of all students in db
-    all_students = database.child("users")
-    return render(request, 'ManageStudents.html', {'students':all_students})
+    lName = database.child("users").get()
+    return render(request, 'ManageStudents.html', {'lName':lName})
 #support page
 def support(request):
     return render(request, 'Support.html')

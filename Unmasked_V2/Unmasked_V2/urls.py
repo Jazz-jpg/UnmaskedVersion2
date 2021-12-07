@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-#from . import views
-from django.urls import path,include 
 from django.conf import settings
 from django.conf.urls.static import static
 from project import views
+from django.conf import settings
 
 urlpatterns = [
     path ('firebaseTest', views.firebaseTest, name='test2'),
@@ -38,3 +37,4 @@ urlpatterns = [
     path ('Support', views.support, name="support"),
     path ('Tips',views.tips,name='tips'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
