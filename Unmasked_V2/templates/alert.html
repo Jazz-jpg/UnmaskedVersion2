@@ -155,15 +155,15 @@
                                                     </tr>
                                             </thead> 
                                             <tbody>
-                        
+                                              {% for u, userInfo in allUsers.items %}
                                                 <tr class="table-light">
-                                                        <td scope="row">Hana</td>
-                                                        <td>Nancy</td>
-                                                        <td>nancyhana@oakland.edu</td>
-                                                        <td style="text-align: center;"> G001000</button></td>
-                                                        <td style="text-align: center;"> 2</td>
-
+                                                        <td scope="row">{{userInfo.l_name}}</td>
+                                                        <td>{{userInfo.f_name}}</td>
+                                                        <td>{{userInfo.email}}</td>
+                                                        <td style="text-align: center;"> {{u}}</button></td>
+                                                        <td style="text-align: center;"> {{userInfo.offenses}}</td>
                                                 </tr>
+                                                {% endfor %}
                                             </tbody>
                                     </table>
                                 </div>

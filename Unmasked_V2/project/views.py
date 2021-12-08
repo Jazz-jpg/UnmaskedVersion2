@@ -1,3 +1,4 @@
+from typing import OrderedDict
 from cv2 import VideoCapture, fastNlMeansDenoisingColoredMulti
 from django.shortcuts import render, redirect#will render/show web files
 from django.http import HttpResponse
@@ -13,7 +14,9 @@ import threading
 import project.Facial_Recog.Detector as Detector 
 from project.Facial_Recog.facerecognizer import FaceRecognizer
 from firebase_admin import db
-from django import forms
+
+from collections import OrderedDict
+from operator import getitem
 #Configuration for firebase database
 fr = FaceRecognizer()
 fr.initFirebaseDB()
@@ -36,7 +39,7 @@ def addStud(request):
     lName = request.GET['Last Name']
     GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
-    studPic = forms.ImageFields['student-pic']
+    studPic = request.FILES['Image']
     
     #Inserting data in firebase db
     database = {"email":email,"f_name":fName,"l_name":lName,"picture1": studPic}
@@ -48,8 +51,8 @@ def addStud(request):
 def deletestudent(request):
     database = fr.getDatabase()
     GrizzID = request.GET['Grizz-ID']
-    #db.reference('/users/').child(GrizzID).delete()
-    print("Would of deleted")
+    db.reference('/users/').child(GrizzID).delete()
+    #print("Would of deleted")
     return redirect(manageStudents)
 
 #Update student from database
@@ -61,9 +64,11 @@ def studentupdate(request):
     GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
 
-    database = {"email":email,"f_name":fName,"l_name":lName}
-    #database.child(GrizzID).update(data)
+    temp = {"email":email,"f_name":fName,"l_name":lName}
+    #db.reference('/users/').child(GrizzID).update(temp)
     return render(request, 'ManageStudents.html')
+def update(request):
+    return render(request, 'update.html')
 #Admin homepage
 def adminHome(request):
     return render(request, 'AdminHome.html')
@@ -79,7 +84,16 @@ def alert(request):
         temp = temp.get()
         #print(temp)
         allKey[user] = temp
-    return render(request, 'alert.html',{'allUsers':allKey})
+        
+    #Title: Python | Sort nested dictionary by key
+    #Author: GeeksforGeeks
+    #Date: 2020
+    #Code Version: Python3
+    #Abailability: https://www.geeksforgeeks.org/python-sort-nested-dictionary-by-key/
+    
+    sortedKeys = OrderedDict(sorted(allKey.items(), key = lambda x: getitem(x[1], 'offenses'),reverse=True))
+    print(sortedKeys)
+    return render(request, 'alert.html',{'allUsers':sortedKeys})
 #Contact page
 def contact(request):
     return render(request, 'Contact.html')

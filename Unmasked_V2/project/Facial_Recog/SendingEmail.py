@@ -3,7 +3,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-#get user from DB WIP
+##Title: How to Send Emails Using Python - Plain Text, Adding Attachments, HTML Emails, and More
+#Author: Corey Schafer
+#Date:  2019
+#Code Version: Python3
+#Abailability: https://www.youtube.com/watch?v=JRCJ6RtE3xU, https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Emails
+
+#gets email from db and sends automated email
 def sendEmail(email):
     #Email and password to be sent from
     email = 'rcyang@oakland.edu'

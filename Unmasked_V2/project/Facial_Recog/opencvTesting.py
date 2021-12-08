@@ -1,6 +1,13 @@
 #Importing openCV
 import cv2 as cv
 
+#Title: OpenCV Course - Full Tutorial with Python
+#Author: freeCodeCamp.org
+# #Date: 2020
+#Code Version: Python3
+#Abailability: https://www.youtube.com/watch?v=oXlwWbU8l2o, https://github.com/jasmcaus/opencv-course
+
+
 #Reading Images
 #Assigning image to img from TestingPhotos File in Current Directory
 img = cv.imread('TestingPhotos/10-of-the-deadliest-sea-creatures-in-the-world-6.jpg')

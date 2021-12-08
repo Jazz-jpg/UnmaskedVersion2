@@ -1,7 +1,13 @@
 import numpy as np
 import cv2 as cv
 
-#Obtain info from FaceTesting
+#Title: OpenCV Course - Full Tutorial with Python
+#Author: freeCodeCamp.org
+# #Date: 2020
+#Code Version: Python3
+#Abailability: https://www.youtube.com/watch?v=oXlwWbU8l2o, https://github.com/jasmcaus/opencv-course
+
+# Obtain info from FaceTesting
 haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')
 
 people = ["Ben Afflek", "Beyonce", "Scarlett Johansson","Ryan Reynolds"]

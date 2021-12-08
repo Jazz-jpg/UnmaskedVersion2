@@ -85,7 +85,11 @@ class FaceRecognizer:
         cv.waitKey(1)
         return self.people[label]
         
-  
+        #Title: OpenCV Course - Full Tutorial with Python
+         #Author: freeCodeCamp.org
+        # #Date: 2020
+        #Code Version: Python3
+        #Abailability: https://www.youtube.com/watch?v=oXlwWbU8l2o, https://github.com/jasmcaus/opencv-course
 
     def create_train(self, DIR):
         haar_cascade = cv.CascadeClassifier(self.path + 'haar_face.xml')
