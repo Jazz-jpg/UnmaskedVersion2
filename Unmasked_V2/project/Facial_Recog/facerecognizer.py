@@ -6,12 +6,14 @@ import project.Facial_Recog.Detector as Detector
 from project.Facial_Recog.firebase import FireBase
 import sys
 from project.Facial_Recog.SendingEmail import sendEmail
+import keyboard
+
 class FaceRecognizer:
     def __init__(self):
         self.fire = None
         self.path = None
         self.haar_cascade = None
-        self.USERS = r'C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+        self.USERS = r'C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
         
         self.people = []
     
@@ -40,22 +42,24 @@ class FaceRecognizer:
             self.setPeople(users)
             self.compareUsers()
             self.create_train(self.USERS)
-            while True:
-                try:
-                    Detector.capture()
-                    imgPath = "C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/my-image.png"
-                    img = cv.imread(imgPath)
-                    name = self.detect(img)
-                    if name == None:
-                        print("Unknown entity")
-                    else:
-                        userid = self.fire.getUserID(name)
-                        self.fire.iterateOffenses(userid)
-                        self.fire.addOffendingPic(userid, imgPath)
-                        email = self.fire.getEmail(userid)
-                        sendEmail(email)
-                except KeyboardInterrupt:
-                    break
+            
+            
+                
+            Detector.capture()
+            imgPath = "C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/my-image.png"
+            img = cv.imread(imgPath)
+            name = self.detect(img)
+            if name == None:
+                print("Unknown entity")
+            else:
+                userid = self.fire.getUserID(name)
+                self.fire.iterateOffenses(userid)
+                self.fire.addOffendingPic(userid, imgPath)
+                email = self.fire.getEmail(userid)
+                sendEmail(email)
+                
+                cv.destroyAllWindows
+        
         else:
             print("The people list is empty. Please run setPeople")
 
@@ -82,7 +86,8 @@ class FaceRecognizer:
         cv.imshow('Detected_Face', img)
         if label == None:
             return None
-        cv.waitKey(1)
+        cv.waitKey(5)
+        cv.destroyAllWindows
         return self.people[label]
         
         #Title: OpenCV Course - Full Tutorial with Python

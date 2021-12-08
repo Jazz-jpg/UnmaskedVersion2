@@ -8,7 +8,7 @@ import cv2 as cv
 #Abailability: https://www.youtube.com/watch?v=oXlwWbU8l2o, https://github.com/jasmcaus/opencv-course
 
 # Obtain info from FaceTesting
-haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')
+haar_cascade = cv.CascadeClassifier('C:\Users\Jazz\Desktop\UnmaskedVersion2\Unmasked_V2\project\Facial_Recog\haar_face.xml')
 
 people = ["Ben Afflek", "Beyonce", "Scarlett Johansson","Ryan Reynolds"]
 # np.load('features.npy')

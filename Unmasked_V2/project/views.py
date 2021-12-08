@@ -40,6 +40,7 @@ def addStud(request):
     GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
     #studPic = request.FILES['Image']
+    fr
     
     #Inserting data in firebase db
     database = {"email":email,"f_name":fName,"l_name":lName,"offences": 0}
@@ -124,11 +125,8 @@ def manageStudents(request):
 # Start detection function
 def startDetect(request):
     fr.initFirebaseDB()
-    def gen(camera):
-        while True:
-            frame = camera.get_frame()
-            yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-    return StreamingHttpResponse(gen(fr.startDetect()), content_type = 'multipart/x-mixed-replace; boundary=frame')
+    fr.startDetect()
+    return render(request,'AdminHome.html')
 #support page
 def support(request):
     return render(request, 'Support.html')

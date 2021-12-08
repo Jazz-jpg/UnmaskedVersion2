@@ -1,33 +1,19 @@
-"""
-import os
-from os import walk
 
-import firebase_admin
-from firebase import FireBase
+#import os
+#from os import walk
 
-usersdir = 'C:/Users/PCAero/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/TestingFaces/'
+#import firebase_admin
+#from firebase import FireBase
 
-directories = next(os.walk(usersdir), (None, [], None))[1]
-counter = 0
-fb = FireBase()
-#img = r"C:\Users\PCAero\Desktop\UnmaskedVersion2\Unmasked_V2\project\Facial_Recog\TestingFaces\Scarlett Johansson\MV5BMTM3OTUwMDYwNl5BMl5BanBnXkFtZTcwNTUyNzc3Nw@@._V1_.jpg"
 
-#fb.addUserPic('G3', img)
-
-for i in directories:
-    userdir = usersdir + i
-    if i == "Validation":
-        pass
-    else:
-        spaceParser = i.find(" ")
-        f_name = i[:spaceParser]
-        l_name = i[spaceParser+1:]
-        filenames = next(os.walk(userdir), (None, None, []))[2]
-        gid = "G" + str(counter)
-        data = {"f_name": f_name, "l_name": l_name}
-        fb.createUser(gid, data)
-        for j in filenames:
-            pic = userdir + '/' + j
-            fb.addUserPic(gid, pic)
-        counter += 1
-"""
+#F=FireBase()
+#Data={"f_name": "Jasmin", "l_name": "Medic", "email": "medic@oakland.edu"}
+#F.createUser("G000025",Data)
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20200106_145240.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20211208_123838_HDR.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20211208_123850_HDR.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20211208_123853.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20211208_123855.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20211208_123900.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/20211208_123857.jpg")
+#F.addUserPic("G000025","C:/Users/Jazz/Desktop/pics for firebase/FB_IMG_1638985072314.jpg")

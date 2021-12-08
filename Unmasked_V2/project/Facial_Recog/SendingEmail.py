@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 #Abailability: https://www.youtube.com/watch?v=JRCJ6RtE3xU, https://github.com/CoreyMSchafer/code_snippets/tree/master/Python/Emails
 
 #gets email from db and sends automated email
-def sendEmail(email):
+def sendEmail(Useremail):
     #Email and password to be sent from
     email = 'rcyang@oakland.edu'
     password = 'windDragon9'
@@ -18,7 +18,7 @@ def sendEmail(email):
     #Currently static,get email from DB in future
 
     #send_to_email = 'lunarflaring@gmail.com'
-    send_to_email = email
+    send_to_email = Useremail
     #Email subject and body
     subject = 'WARNING: Mask Mandate Violation' # The subject line
     message = 'This is my message'

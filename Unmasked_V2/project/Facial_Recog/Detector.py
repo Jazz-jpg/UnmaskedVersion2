@@ -1,10 +1,12 @@
+from re import escape
 import cv2
 from firebase_admin import initialize_app
 import numpy as np
 import time
+import keyboard
 
-face_cascade = cv2.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_frontalface_alt2.xml')
-profile_cascade = cv2.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_profileface.xml')
+face_cascade = cv2.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_frontalface_alt2.xml')
+profile_cascade = cv2.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_profileface.xml')
 
 class RectObject:
     def CreateRectangle(self,x1,y1,width,height, frame, color=(255,0,0)):
@@ -68,11 +70,15 @@ def capture():
 
     while True:
         try:
+            if keyboard.is_pressed("q"):
+                cap.release()
+                cv2.destroyAllWindows
+                break
             #capture frame by frame
             ret, frame=cap.read()
             gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
-            sideprof = profile_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
+            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=12)
+            sideprof = profile_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=6)
             R1 = None
             R2 = None
             cv2.imshow("Facial Detector", frame)
@@ -99,7 +105,7 @@ def capture():
                 TimeElapsed = False
                 t = 5
                 break
-        except KeyboardInterrupt:
+        except keyboard.is_pressed("q"):
             break
         cv2.waitKey(1)
     
