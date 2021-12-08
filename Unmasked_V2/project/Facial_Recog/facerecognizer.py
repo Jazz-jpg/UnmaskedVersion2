@@ -5,6 +5,7 @@ import os
 import project.Facial_Recog.Detector as Detector
 from project.Facial_Recog.firebase import FireBase
 import sys
+import keyboard
 
 class FaceRecognizer:
     def __init__(self):
@@ -52,7 +53,7 @@ class FaceRecognizer:
                         userid = self.fire.getUserID(name)
                         self.fire.iterateOffenses(userid)
                         self.fire.addOffendingPic(userid, imgPath)
-                except KeyboardInterrupt:
+                except keyboard.is_pressed('Esc'):
                     break
         else:
             print("The people list is empty. Please run setPeople")
