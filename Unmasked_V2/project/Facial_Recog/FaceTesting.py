@@ -1,4 +1,3 @@
-#Training Facial model code
 #Importing openCV
 import cv2 as cv
 import os
@@ -7,7 +6,8 @@ import numpy as np
 #make list of people in images manually
 DIR = r'C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
 #Base folder
-DIR = r'C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/TestingFaces'
+#DIR = r'C:/Users/PCAero/Desktop/FacialRecognition/TestingFaces'
+#DIR = r'C:/Users/PCAero/Desktop/FacialRecognition/users'
 
 #harr_face classifier 
 haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')

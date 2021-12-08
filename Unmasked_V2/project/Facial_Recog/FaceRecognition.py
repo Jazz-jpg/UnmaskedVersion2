@@ -1,9 +1,8 @@
-#Primary program for face recognition and accuracy
 import numpy as np
 import cv2 as cv
 
 #Obtain info from FaceTesting
-haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')
+haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog//haar_face.xml')
 
 people = ["Ben Afflek", "Beyonce", "Scarlett Johansson","Ryan Reynolds"]
 # np.load('features.npy')
@@ -16,7 +15,7 @@ face_recognizer.read('face_trained.yml')
 img = cv.imread(r"C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/TestingFaces/Validation/Ryan Reynolds/0a8d421e28716e6805ce7a2bd0f3052d.jpg")
 
 #turn image to grayscale
-gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY )
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow('Person', gray)
 
 #detect face in image

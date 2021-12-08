@@ -12,7 +12,7 @@ import time
 fire = FireBase()
 fr = FaceRecognizer()
 ryanid = "G000001"
-path = "C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog"
+path = "C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/"
 path = fire.getPath()
 fr = FaceRecognizer(path)
 # data = {

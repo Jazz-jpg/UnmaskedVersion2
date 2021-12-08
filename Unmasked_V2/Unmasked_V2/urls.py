@@ -21,11 +21,13 @@ from project import views
 from django.conf import settings
 
 urlpatterns = [
-    path ('firebaseTest', views.firebaseTest, name='test2'),
+    #path ('firebaseTest', views.firebaseTest, name='test2'),
     path ('', views.index, name='test'), #Testing
     path ('About', views.about, name= 'about'),
     path ('Add', views.add,name="add"),
     path ('addStud', views.addStud,name="addStud"),
+    path ('deletestudent', views.deletestudent, name='deletestudent'),
+    path ('update' , views.studentupdate, name='studentupdate'),
     path ('AdminHome',views.adminHome, name= 'adminHome'),
     path ('alert',views.alert, name="alert"),
     path ('Contact',views.contact, name ='contact'),
@@ -34,6 +36,7 @@ urlpatterns = [
     path ('Login', views.login, name="login"),
     path ('Logout', views.logout, name='logout'),
     path ('ManageStudents', views.manageStudents, name="manageStudents"),
+    path ('startDetect', views.startDetect, name="startDetect"),
     path ('Support', views.support, name="support"),
     path ('Tips',views.tips,name='tips'),
 ]
