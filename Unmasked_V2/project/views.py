@@ -13,6 +13,7 @@ import threading
 import project.Facial_Recog.Detector as Detector 
 from project.Facial_Recog.facerecognizer import FaceRecognizer
 from firebase_admin import db
+from django import forms
 #Configuration for firebase database
 fr = FaceRecognizer()
 fr.initFirebaseDB()
@@ -35,24 +36,28 @@ def addStud(request):
     lName = request.GET['Last Name']
     GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
-    #studPic = request.GET['student-pic']
+    studPic = forms.ImageFields['student-pic']
     
     #Inserting data in firebase db
-    database = {"email":email,"f_name":fName,"l_name":lName}
-    #database.child("users").child('Users/'+ GrizzID).set(data)
+    database = {"email":email,"f_name":fName,"l_name":lName,"picture1": studPic}
+    db.reference("/users/").child(GrizzID).update(database)
     
     #redirecting to manage student page
     return render(request, 'ManageStudents.html')
 #Deletes student from database
 def deletestudent(request):
+    database = fr.getDatabase()
     GrizzID = request.GET['Grizz-ID']
-   # database.child(GrizzID).delete()
-    return render(request, 'ManageStudents.html')
+    #db.reference('/users/').child(GrizzID).delete()
+    print("Would of deleted")
+    return redirect(manageStudents)
+
 #Update student from database
+#WIP
 def studentupdate(request):
     database = fr.getDatabase()
-    fName = request.GET['First Name']
-    lName = request.GET['Last Name']
+    fName = request.GET['FirstName']
+    lName = request.GET['LastName']
     GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
 
@@ -63,8 +68,18 @@ def studentupdate(request):
 def adminHome(request):
     return render(request, 'AdminHome.html')
 #Alert page
+#WIP
 def alert(request):
-    return render(request, 'alert.html')
+    allKey = {}
+    data = fr.getDatabase()
+    data = db.reference('/users/')
+    users = data.get()
+    for user in users:
+        temp = db.reference('/users/'+ user)
+        temp = temp.get()
+        #print(temp)
+        allKey[user] = temp
+    return render(request, 'alert.html',{'allUsers':allKey})
 #Contact page
 def contact(request):
     return render(request, 'Contact.html')
@@ -89,7 +104,7 @@ def manageStudents(request):
     for user in users:
         temp = db.reference('/users/'+ user)
         temp = temp.get()
-        print(temp)
+        #print(temp)
         allKey[user] = temp
     return render(request, 'ManageStudents.html',{'allUsers':allKey})
 # Start detection function
@@ -99,7 +114,6 @@ def startDetect(request):
         while True:
             frame = camera.get_frame()
             yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-    
     return StreamingHttpResponse(gen(fr.startDetect()), content_type = 'multipart/x-mixed-replace; boundary=frame')
 #support page
 def support(request):

@@ -5,13 +5,13 @@ import os
 import project.Facial_Recog.Detector as Detector
 from project.Facial_Recog.firebase import FireBase
 import sys
-
+from project.Facial_Recog.SendingEmail import sendEmail
 class FaceRecognizer:
     def __init__(self):
         self.fire = None
         self.path = None
         self.haar_cascade = None
-        self.USERS = r'C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+        self.USERS = r'C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
         
         self.people = []
     
@@ -43,7 +43,7 @@ class FaceRecognizer:
             while True:
                 try:
                     Detector.capture()
-                    imgPath = "C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/my-image.png"
+                    imgPath = "C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/my-image.png"
                     img = cv.imread(imgPath)
                     name = self.detect(img)
                     if name == None:
@@ -52,6 +52,8 @@ class FaceRecognizer:
                         userid = self.fire.getUserID(name)
                         self.fire.iterateOffenses(userid)
                         self.fire.addOffendingPic(userid, imgPath)
+                        email = self.fire.getEmail(userid)
+                        sendEmail(email)
                 except KeyboardInterrupt:
                     break
         else:

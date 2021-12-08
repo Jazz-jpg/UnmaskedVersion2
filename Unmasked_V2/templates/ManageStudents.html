@@ -153,29 +153,36 @@
                         
                             <table class = "table table-bordered table-light table-hover" id="Students-table">
 
-                                <thead class="table-active">
+                                <thead class="table-active">            
                                               <tr>
+                                                <th>GrizzID</th>
                                                 <th>Last Name</th>
                                                 <th >First Name</th>
                                                 <th>Email</th>
-                                                <th style="text-align: center;">Picture </th>
                                                 <th style="text-align: center;">Delete</th>
                                                 <th style="text-align: center;">Update</th>
                                                 <th style="text-align: center;">Alert</th>
                                             </tr>
+                                            
                                     </thead> 
                                     <tbody>
-                
+                                      {% for user, userInfo in allUsers.items %}
                                         <tr class="table-light">
-                                                <td scope="row">Hana</td>
-                                                <td>Nancy</td>
-                                                <td>nancyhana@oakland.edu</td>
-                                                <td style="text-align: center;"> <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ImageOnFile"><i class="icon-picture"></i> View</button></td>
-                                                <td style="text-align: center;"> <button type="button" class="btn btn-danger"> X</button> </td>
+                                                <td scope="row">{{user}}</td>
+                                                <td>{{userInfo.l_name}}</td>
+                                                <td>{{userInfo.f_name}}</td>
+                                                <td>{{userInfo.email}}</td>
+                                                <form action="{% url 'deletestudent' %}">
+                                                  <td>
+                                                  <input type="hidden" name="Grizz-ID" id= "Grizz-ID" value="{{user}}"> 
+                                                  <button type='submit' value='submit' class="btn btn-danger"> X </button>
+                                                </td>
+                                                </form>
                                                 <td style="text-align: center;"><a href= "update"> <button type="button" class="btn btn-dark"><i class="icon-refresh"></i></button></a></td>
                                                 <td style="text-align: center;"> <a href= "alert"><button type="button" class="btn btn-info"><i class="icon-exclamation-sign"></i></button></a></td>
-                                              
                                               </tr>
+                                              {% endfor %}
+                                      
                                     </tbody>
                             </table>
                     </div>
@@ -191,8 +198,6 @@
 
                     </div>
             </div>
-
-  
   
   <!-- Modal On File -->
  <div class="modal fade" id="ImageOnFile" tabindex="-1" aria-labelledby="ImageOnFileLabel" aria-hidden="true">

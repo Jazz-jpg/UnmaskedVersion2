@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 
 #Obtain info from FaceTesting
-haar_cascade = cv.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')
+haar_cascade = cv.CascadeClassifier('C:/Users/Gamer/Desktop/GitRipo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')
 
 people = ["Ben Afflek", "Beyonce", "Scarlett Johansson","Ryan Reynolds"]
 # np.load('features.npy')
