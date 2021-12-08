@@ -2,6 +2,7 @@ import cv2
 from firebase_admin import initialize_app
 import numpy as np
 import time
+import keyboard
 
 face_cascade = cv2.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_frontalface_alt2.xml')
 profile_cascade = cv2.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_profileface.xml')
@@ -99,7 +100,7 @@ def capture():
                 TimeElapsed = False
                 t = 5
                 break
-        except KeyboardInterrupt:
+        except keyboard.is_pressed('Esc'):
             break
         cv2.waitKey(1)
     
