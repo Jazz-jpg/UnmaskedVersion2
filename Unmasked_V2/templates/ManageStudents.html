@@ -1,162 +1,225 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="eng" dir="ltr">
-
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Students</title>
-<!--    <link rel="stylesheet" href="design.css">-->
-     <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <!---Font Awesome Icons-->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 
-     </head>
+    <title>Students</title>
+  </head>
+
+<style>
+
+.display-1{
+  color: goldenrod !important;
+  font-family:  Impact, fantasy;
+  
+}
 
 
+.btn-warning{
+  background-color: goldenrod ;
+  font-family: Impact,fantasy;
+}
 
-  <div class = "container">
-<nav class="navbar navbar-default">
-    <div class = "container">
+.navbar-brand{
+  font-family: 'Brush Script MT', cursive;
+  font-size: 35px;
+}
 
-        <div>
-        <ul class="nav navbar-nav">
-            <li> <a href="AdminHome">HOME</a></li>
-            <li> <a href="ManageStudents" >Manage Students</a></li>
-            <li> <a href="alert">Alert Page</a></li>
-            <li> <a href="Tips">Tips and Tricks</a></li>
+.img-wrapper {
+  position: relative;
+}
 
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <li> <a href="Logout" >Logout</a></li>
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
 
-            </ul>
+.img-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 25;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
 
+.img-overlay:before {
+  content: ' ';
+  display: block;
+  /* adjust 'height' to position overlay content vertically */
+  height: 50%;
+}
+
+.my-container{
+    background-color:#edddcd;
+    width: 100vw;
+    height: 20vh;
+
+}
+</style>
+
+  <!------------------------------------------------------Navbar----------------------------------------------------------------------------------->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Unmasked</a>
+      
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+                                <!--Home Link-->
+            <a class="nav-link" href="AdminHome">
+            <i class="icon-home"></i>
+                Home
+            </a>
+          </li>
+
+          <li class="nav-item">
+                                <!--About Link-->
+            <a class="nav-link active" aria-current="page" href="ManageStudents"><i class="icon-male"></i></i> 
+              Manage Students
+            </a>
+          </li>
+
+          
+        </ul>
+                                <!--- Login Buton-->
+                                <a href="Logout"><button class="btn btn-outline-warning" type="submit"><i class="icon-signout"></i>Log Out</button></a>
+      </div>
+    </div>
+  </nav>
+<!------------------------------------------------------Navbar----------------------------------------------------------------------------------->
+
+
+<!------------------------------------------------------Body Content----------------------------------------------------------------------------------->
+  <body>
+    
+    
+    <body>
+        <div class="container-fluid my-container">
+          <h1 class="display-1 text-center text-decoration-underline fw-bold">Manage Students</h1>
+          <div class="row justify-content-center">                         
+            <img src="{% static 'img/covid-wear-mask.png' %}" style="width: 100px;">
+       </div>
         </div>
-    </div>
-</nav>
-    </div>
+        <br>
 
-<body>
+          
 
+          
 
-<div class = "container">
-
-<div class = "row">
-
-    <div class = "col-md-offset-5">
-
-    <h4>List of Students </h4>
-   <a href = "Add">
- <button type="button" class="btn btn-success">Add a Student</button>
-        </a>
-    </div>
-</div>
-<br>
-
-<div class = "container-fluid custom-container-table">
-
-
-
-    <div class = "row">
-        <table class = "table table-bordered table-light table-hover" id="Students-table">
-
-        <thead class="table-active">
-                      <tr>
-                        <th>Last Name</th>
-                        <th >First Name</th>
-                        <th>Email</th>
-                        <th>Picture </th>
-                        <th>Picture with mask</th>
-                        <th>Delete</th>
-                        <th>Update</th>
-                    </tr>
-            </thead>
-
-            <tbody>
+     
+        <div class="col">
+            <div class="row">
+            
+            
+            
+                           
+                <div class="col-sm-4" > </div>
+                  
+                <div class="col-sm-4 justify-content-right">
+                    <div class="row justify-content-center" style="text-align: center;"><a href="Add"><button class="form-control btn btn-dark btn-outline-warning" style="border:solid 5px #edddcd ; width: 350px; height: 75px; border-radius: 35px; font-weight: bold;" id="login-submit" name="login-submit" value="Log In" type="submit"><i class="icon-plus-sign"></i>Add A Student<i class="icon-plus-sign"></i></button></div>
+                    </a> 
+                  </div>
                 
-                <tr class="table-light">
-                        <td scope="row">Hana</td>
-                        <td>Nancy</td>
-                        <td>nancyhana@oakland.edu</td>
-                    <td> <button type="button" class="btn btn-warning">View</button></td>
-                        <td> image with mask</td>
-                        <td> <button type="button" class="btn btn-danger"> X</button> </td>
-                          <td> <button type="button" class="btn btn-info"> X</button></td>
-                </tr>
+            
+            
+                   
+                <div class="col-sm-4" ></div>
+                <div class="container" style="height: 50px;"></div>
 
-                 <tr class="table-light">
-                        <td scope="row">Reynolds</td>
-                        <td>Ryan</td>
-                        <td>rreynolds@yahoo.com</td>
-                        <td> <button type="button" class="btn btn-warning">View</button>
+                <div class="row">
+            
+            
+            
+                           
+                    <div class="col-sm-2" > </div>
+                      
+                    <div class="col-sm-8 justify-content-center">
+                        <div class="col sm-6">
+                        
+                            <table class = "table table-bordered table-light table-hover" id="Students-table">
 
+                                <thead class="table-active">
+                                              <tr>
+                                                <th>Last Name</th>
+                                                <th >First Name</th>
+                                                <th>Email</th>
+                                                <th style="text-align: center;">Picture </th>
+                                                <th style="text-align: center;">Delete</th>
+                                                <th style="text-align: center;">Update</th>
+                                                <th style="text-align: center;">Alert</th>
+                                            </tr>
+                                    </thead> 
+                                    <tbody>
+                
+                                        <tr class="table-light">
+                                                <td scope="row">Hana</td>
+                                                <td>Nancy</td>
+                                                <td>nancyhana@oakland.edu</td>
+                                                <td style="text-align: center;"> <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ImageOnFile"><i class="icon-picture"></i> View</button></td>
+                                                <td style="text-align: center;"> <button type="button" class="btn btn-danger"> X</button> </td>
+                                                <td style="text-align: center;"><a href= "update"> <button type="button" class="btn btn-dark"><i class="icon-refresh"></i></button></a></td>
+                                                <td style="text-align: center;"> <a href= "alert"><button type="button" class="btn btn-info"><i class="icon-exclamation-sign"></i></button></a></td>
+                                              
+                                              </tr>
+                                    </tbody>
+                            </table>
+                    </div>
+                </div>
+                
+                
+                       
+                    <div class="col-sm-2" ></div>
+            
+                
+            </div>
+                    
 
+                    </div>
+            </div>
 
-
-
-
-                        </td>
-                        <td> image with mask</td>
-                     <td> <button type="button" class="btn btn-danger"> X</button></td>
-                          <td> <button type="button" class="btn btn-info"> X</button></td>
-                </tr>
-
-                <tr class="table-light">
-                        <td scope="row">Lu</td>
-                        <td>Andy</td>
-                        <td>andylu@oakland.edu</td>
-                        <td> <button type="button" class="btn btn-warning">View</button></td>
-                        <td> image with mask</td>
-                    <td> <button type="button" class="btn btn-danger"> X</button></td>
-                          <td> <button type="button" class="btn btn-info"> X</button></td>
-                </tr>
-
-                      <tr class="table-light">
-                        <td scope="row">Johansson</td>
-                        <td>Scarlett</td>
-                        <td>scarlettjohansson@gmail.com</td>
-                        <td> <button type="button" class="btn btn-warning">View</button></td>
-                        <td> image with mask</td>
-                          <td> <button type="button" class="btn btn-danger"> X</button></td>
-                          <td> <button type="button" class="btn btn-info"> X</button></td>
-                </tr>
-
-                   <tr class="table-light">
-                        <td scope="row">Knowles</td>
-                        <td>Beyonce</td>
-                        <td>beyonce1010@gmail.com</td>
-                        <td> <button type="button" class="btn btn-warning">View</button></td>
-                        <td> image with mask</td>
-                       <td> <button type="button" class="btn btn-danger"> X</button></td>
-                         <td> <button type="button" class="btn btn-info"> X</button></td>
-                </tr>
-
-                <tr class="table-light">
-                        <td scope="row">Afflek</td>
-                        <td>Ben</td>
-                        <td>benafflek@gmail.com</td>
-                        <td> <button type="button" class="btn btn-warning">View</button></td>
-                        <td> image with mask</td>
-                        <td> <button type="button" class="btn btn-danger"> X</button></td>
-
-
-                    <td> <button type="button" class="btn btn-info"> X</button></td>
-                </tr>
-                <tr>
-
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
+  
+  
+  <!-- Modal On File -->
+ <div class="modal fade" id="ImageOnFile" tabindex="-1" aria-labelledby="ImageOnFileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ImageOnFileLabel">On File</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...<!-- Place Image Here-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
     </div>
+  </div>
+  
+    
+    
+    
 
 
-    </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-</body>
 
+  </body>
 </html>

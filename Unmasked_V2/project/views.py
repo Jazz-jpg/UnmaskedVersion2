@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404,redirect  
 from django.conf import settings
 import pyrebase 
+import firebase_admin
 from pyrebase.pyrebase import Firebase
 from django.views.decorators import gzip
 from django.http import StreamingHttpResponse
@@ -11,7 +12,10 @@ import cv2
 import threading
 import project.Facial_Recog.Detector as Detector 
 from project.Facial_Recog.facerecognizer import FaceRecognizer
+from firebase_admin import db
 #Configuration for firebase database
+fr = FaceRecognizer()
+fr.initFirebaseDB()
 
 #Test page 
 def index (request):
@@ -26,19 +30,34 @@ def add(request):
 #Adds a student and then redirects to manage student page
 def addStud(request):
     #getting information
-    fr = FaceRecognizer()
     database = fr.getDatabase()
-    fName = request.GET['first-name']
-    lName = request.GET['last-name']
-    GrizzID = request.GET['Grizz-ID']
+    fName = request.GET['First Name']
+    lName = request.GET['Last Name']
+    GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
     #studPic = request.GET['student-pic']
     
     #Inserting data in firebase db
-    data = {"email":email,"f_name":fName,"l_name":lName}
+    database = {"email":email,"f_name":fName,"l_name":lName}
     #database.child("users").child('Users/'+ GrizzID).set(data)
     
     #redirecting to manage student page
+    return render(request, 'ManageStudents.html')
+#Deletes student from database
+def deletestudent(request):
+    GrizzID = request.GET['Grizz-ID']
+   # database.child(GrizzID).delete()
+    return render(request, 'ManageStudents.html')
+#Update student from database
+def studentupdate(request):
+    database = fr.getDatabase()
+    fName = request.GET['First Name']
+    lName = request.GET['Last Name']
+    GrizzID = request.GET['GrizzlyID']
+    email = request.GET['Email']
+
+    database = {"email":email,"f_name":fName,"l_name":lName}
+    #database.child(GrizzID).update(data)
     return render(request, 'ManageStudents.html')
 #Admin homepage
 def adminHome(request):
@@ -62,25 +81,27 @@ def login(request):
 def logout(request):
     return render(request, 'LogoutPage.html')
 # manage student page
-# Looping through students in db and showing them 
-def manageStudents(request):
-    
-    fr = FaceRecognizer()
-    database = fr.getDatabase()
-    #Currently not implemented into manage students
-    #Is a dynamic list of all students in db
-    all_students = database.child("users")
-    return render(request, 'ManageStudents.html', {'students':all_students})
-#support page
+def manageStudents(request):  
+    allKey = {}
+    data = fr.getDatabase()
+    data = db.reference('/users/')
+    users = data.get()
+    for user in users:
+        temp = db.reference('/users/'+ user)
+        temp = temp.get()
+        print(temp)
+        allKey[user] = temp
+    return render(request, 'ManageStudents.html',{'allUsers':allKey})
+# Start detection function
 def startDetect(request):
-    fr = FaceRecognizer()
+    fr.initFirebaseDB()
     def gen(camera):
         while True:
             frame = camera.get_frame()
             yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
     
     return StreamingHttpResponse(gen(fr.startDetect()), content_type = 'multipart/x-mixed-replace; boundary=frame')
-
+#support page
 def support(request):
     return render(request, 'Support.html')
 #Tips page

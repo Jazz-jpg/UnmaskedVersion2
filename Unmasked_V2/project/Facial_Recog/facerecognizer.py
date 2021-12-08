@@ -1,3 +1,4 @@
+
 import numpy as np
 import cv2 as cv
 import os
@@ -7,15 +8,22 @@ import sys
 
 class FaceRecognizer:
     def __init__(self):
-        self.fire = FireBase()
-        self.path = self.fire.getPath()
-        self.haar_cascade = cv.CascadeClassifier(self.path + '/haar_face.xml')
-        self.USERS = r'C:/Users/PCAero/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+        self.fire = None
+        self.path = None
+        self.haar_cascade = None
+        self.USERS = r'C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
         
         self.people = []
     
     def getDatabase(self):
         return self.fire
+    def setDatabase(self,fire):
+        self.fire = fire
+    def initFirebaseDB(self):
+        if self.fire == None:
+            self.fire = FireBase()
+            self.path = self.fire.getPath()
+            self.haar_cascade = cv.CascadeClassifier(self.path + '/haar_face.xml')
     def setPeople(self, list):
         self.people = list
 
@@ -35,7 +43,7 @@ class FaceRecognizer:
             while True:
                 try:
                     Detector.capture()
-                    imgPath = self.path + "my-image.png"
+                    imgPath = "C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/my-image.png"
                     img = cv.imread(imgPath)
                     name = self.detect(img)
                     if name == None:
@@ -43,7 +51,7 @@ class FaceRecognizer:
                     else:
                         userid = self.fire.getUserID(name)
                         self.fire.iterateOffenses(userid)
-                        self.fire.addOffendingPic(userid, img)
+                        self.fire.addOffendingPic(userid, imgPath)
                 except KeyboardInterrupt:
                     break
         else:
@@ -72,7 +80,9 @@ class FaceRecognizer:
         cv.imshow('Detected_Face', img)
         if label == None:
             return None
+        cv.waitKey(1)
         return self.people[label]
+        
   
 
     def create_train(self, DIR):
