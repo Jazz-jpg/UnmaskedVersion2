@@ -39,14 +39,14 @@ def addStud(request):
     lName = request.GET['Last Name']
     GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
-    studPic = request.FILES['Image']
+    #studPic = request.FILES['Image']
     
     #Inserting data in firebase db
-    database = {"email":email,"f_name":fName,"l_name":lName,"picture1": studPic}
+    database = {"email":email,"f_name":fName,"l_name":lName,"offences": 0}
     db.reference("/users/").child(GrizzID).update(database)
     
     #redirecting to manage student page
-    return render(request, 'ManageStudents.html')
+    return redirect(manageStudents)
 #Deletes student from database
 def deletestudent(request):
     database = fr.getDatabase()
@@ -92,7 +92,7 @@ def alert(request):
     #Abailability: https://www.geeksforgeeks.org/python-sort-nested-dictionary-by-key/
     
     sortedKeys = OrderedDict(sorted(allKey.items(), key = lambda x: getitem(x[1], 'offenses'),reverse=True))
-    print(sortedKeys)
+    #print(sortedKeys)
     return render(request, 'alert.html',{'allUsers':sortedKeys})
 #Contact page
 def contact(request):
@@ -108,7 +108,7 @@ def login(request):
     return render(request, 'Login.html')
 #Logout page
 def logout(request):
-    return render(request, 'LogoutPage.html')
+    return render(request, 'Home.html')
 # manage student page
 def manageStudents(request):  
     allKey = {}
