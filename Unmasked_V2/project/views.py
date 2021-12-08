@@ -1,4 +1,4 @@
-from cv2 import fastNlMeansDenoisingColoredMulti
+from cv2 import VideoCapture, fastNlMeansDenoisingColoredMulti
 from django.shortcuts import render, redirect#will render/show web files
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404,redirect  
@@ -6,30 +6,17 @@ from django.conf import settings
 import pyrebase 
 import firebase_admin
 from pyrebase.pyrebase import Firebase
-
+from django.views.decorators import gzip
+from django.http import StreamingHttpResponse
+import cv2
+import threading
+import project.Facial_Recog.Detector as Detector 
+from project.Facial_Recog.facerecognizer import FaceRecognizer
+from firebase_admin import db
 #Configuration for firebase database
-config = {
-            "apiKey": "AIzaSyAxV8-iToKuLitUmG48EEkIddvq7iYrN2Y",
-            "authDomain": "facial-recongition-38069.firebaseapp.com",
-            "databaseURL": "https://facial-recongition-38069-default-rtdb.firebaseio.com",
-            "projectId": "facial-recongition-38069",
-            "storageBucket": "facial-recongition-38069.appspot.com",
-            "messagingSenderId": "937313859878",
-            "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
-        }
-cred_obj = firebase_admin.credentials.Certificate(
-            'C:/Users/justi/Desktop/Unmasked2Ripo/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
-default_app = firebase_admin.initialize_app(
-            cred_obj, {'databaseURL': config["databaseURL"]})
-firebase=pyrebase.initialize_app(config)
-authe = firebase.auth()
-database=firebase.database()
+fr = FaceRecognizer()
+fr.initFirebaseDB()
 
-#Testing db connection via getting an email from db to print      
-def firebaseTest(request):
-    name = database.child("users").child("G2356732").child("email").get().val()
-    name2 = database.child("users").child("G4589350").child("email").get().val()
-    return HttpResponse(name)
 #Test page 
 def index (request):
     return render(request, 'index.html')
@@ -43,17 +30,34 @@ def add(request):
 #Adds a student and then redirects to manage student page
 def addStud(request):
     #getting information
-    fName = request.GET['first-name']
-    lName = request.GET['last-name']
-    GrizzID = request.GET['Grizz-ID']
+    database = fr.getDatabase()
+    fName = request.GET['First Name']
+    lName = request.GET['Last Name']
+    GrizzID = request.GET['GrizzlyID']
     email = request.GET['Email']
     #studPic = request.GET['student-pic']
     
     #Inserting data in firebase db
-    data = {"email":email,"f_name":fName,"l_name":lName}
-    database.child("users").child(GrizzID).set(data)
+    database = {"email":email,"f_name":fName,"l_name":lName}
+    #database.child("users").child('Users/'+ GrizzID).set(data)
     
     #redirecting to manage student page
+    return render(request, 'ManageStudents.html')
+#Deletes student from database
+def deletestudent(request):
+    GrizzID = request.GET['Grizz-ID']
+   # database.child(GrizzID).delete()
+    return render(request, 'ManageStudents.html')
+#Update student from database
+def studentupdate(request):
+    database = fr.getDatabase()
+    fName = request.GET['First Name']
+    lName = request.GET['Last Name']
+    GrizzID = request.GET['GrizzlyID']
+    email = request.GET['Email']
+
+    database = {"email":email,"f_name":fName,"l_name":lName}
+    #database.child(GrizzID).update(data)
     return render(request, 'ManageStudents.html')
 #Admin homepage
 def adminHome(request):
@@ -77,12 +81,26 @@ def login(request):
 def logout(request):
     return render(request, 'LogoutPage.html')
 # manage student page
-# Looping through students in db and showing them 
-def manageStudents(request):
-    #Currently not implemented into manage students
-    #Is a dynamic list of all students in db
-    all_students = database.child("users")
-    return render(request, 'ManageStudents.html', {'students':all_students})
+def manageStudents(request):  
+    allKey = {}
+    data = fr.getDatabase()
+    data = db.reference('/users/')
+    users = data.get()
+    for user in users:
+        temp = db.reference('/users/'+ user)
+        temp = temp.get()
+        print(temp)
+        allKey[user] = temp
+    return render(request, 'ManageStudents.html',{'allUsers':allKey})
+# Start detection function
+def startDetect(request):
+    fr.initFirebaseDB()
+    def gen(camera):
+        while True:
+            frame = camera.get_frame()
+            yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    
+    return StreamingHttpResponse(gen(fr.startDetect()), content_type = 'multipart/x-mixed-replace; boundary=frame')
 #support page
 def support(request):
     return render(request, 'Support.html')
