@@ -85,3 +85,13 @@ Our software is a web-based software that allows admin users to run multiple cam
 
 ● Paste the localhost link into your browser of choice and you should be good to go
 
+
+## Landing Page
+## About Page
+## Resources Page
+## Login
+## Manage Students
+## Update Students
+## Alert
+## System Home
+## Camera
