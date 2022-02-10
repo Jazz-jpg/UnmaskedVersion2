@@ -62,3 +62,26 @@ This kind of project was a new frontier for us. Neither of us have had previous 
 
 ## How It works
 Our software is a web-based software that allows admin users to run multiple cameras on a system. The system requires admins to enter student information into the database including some pictures of the individual. The Pictures are used as training Data to identify individuals using our Facial Recognition Algorithm which is comprised of Haar Cascade Classifiers. The administrator will press the big red Run Button which will launch the camera system and then enable screencapture of individuals on the system. A person with a mask is invisible to the system. But a person without a mask is immediately recognized. After a small delay that we had programmed due to ethical reasons. The system will take a cropped screencapture of the individual and cross reference their photo with what is on hand using our Facial Recognition Classifier. If a match is found the system will notify the individual that is in opposition of mask Mandate via an e-mail that they have under their profile. All the nescessary support functions to make this work are also implemented and functional.
+
+
+# How to run the program
+● Ensure your PC has both python and Django installed You can check this by navigating to your root directory and typing python --version, later when you navigate into the scripts file you can check the django version by launching python in the terminal and following these commands as well as having any missing dependencies
+
+○ >python
+
+○ >Import django
+
+○ >django.get_version()
+
+● download the repo and append the files into a new project app created within the django virtual env
+
+● Open up your command terminal and navigate to the cloned repo folder
+
+● Navigate to the Scripts file in the command terminal and type in activate
+
+● Navigate back to the root folder and change directory into the Unmasked folder
+
+● Type > python manage.py runserver
+
+● Paste the localhost link into your browser of choice and you should be good to go
+
