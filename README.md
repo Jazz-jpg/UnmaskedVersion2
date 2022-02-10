@@ -87,11 +87,21 @@ Our software is a web-based software that allows admin users to run multiple cam
 
 
 ## Landing Page
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/1.png)
 ## About Page
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/2.png)
 ## Resources Page
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/3.png)
 ## Login
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/4.png)
 ## Manage Students
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/5.png)
 ## Update Students
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/6.png)
 ## Alert
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/7.png)
 ## System Home
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/8.png)
 ## Camera
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/9.png)
+![alt-text](https://github.com/Jazz-jpg/UnmaskedVersion2/blob/main/Screenshots/Unmasked%20Screenshot/10.png)
