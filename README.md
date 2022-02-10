@@ -28,10 +28,13 @@ Public health and safety, in addition to social responsibilities and ethical con
 - Figma & Webflo
 
 ## Our Team and Roles
-Scrum Master- Jasmin Medic
-Product Owner - Justin Chorazyczewski
-Back-End - Rachel Yang, Andy Liu
-Front-end - Nancy Hana
+* Team Lead (Scrum Master) - Jasmin Medic ([Jazz-jpg](https://github.com/Jazz-jpg))
+* Product Owner - Rachel Yang ([Lunar-Flare](https://github.com/Lunar-Flare))
+
+* Developer - Justin Chorazyczewski ([JChorazyczewski](https://github.com/JChorazyczewski))
+* Developer -Andy Lu ([AndyLu](https://github.com/luandycs)
+* Developer -Nancy Hana ([Nancy617](https://github.com/nancy617)
+
 
 ## Challenges We Faced As A Team
 This kind of project was a new frontier for us. Neither of us have had previous Machine Learning Experiences and there was a significant learning curve with regards to our technology stack. We learned a lot about the limitations of our software. And the sheer amount of knowledge still left to be learned with regards to machine learning and it's applications.
