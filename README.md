@@ -55,3 +55,7 @@ This kind of project was a new frontier for us. Neither of us have had previous 
 - Limited to frontal face detection
 - limited to identifying 1 individual at a time
 - Scalability with regards to massive amounts of data
+
+
+## How It works
+Our software is a web-based software that allows admin users to run multiple cameras on a system. The system requires admins to enter student information into the database including some pictures of the individual. The Pictures are used as training Data to identify individuals using our Facial Recognition Algorithm which is comprised of Haar Cascade Classifiers. The administrator will press the big red Run Button which will launch the camera system and then enable screencapture of individuals on the system. A person with a mask is invisible to the system. But a person without a mask is immediately recognized. After a small delay that we had programmed due to ethical reasons. The system will take a cropped screencapture of the individual and cross reference their photo with what is on hand using our Facial Recognition Classifier. If a match is found the system will notify the individual that is in opposition of mask Mandate via an e-mail that they have under their profile. All the nescessary support functions to make this work are also implemented and functional.
