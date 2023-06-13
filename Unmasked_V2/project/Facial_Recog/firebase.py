@@ -12,13 +12,7 @@ import random
 class FireBase:
     def __init__(self):
         self.config = {
-            "apiKey": "AIzaSyAxV8-iToKuLitUmG48EEkIddvq7iYrN2Y",
-            "authDomain": "facial-recongition-38069.firebaseapp.com",
-            "databaseURL": "https://facial-recongition-38069-default-rtdb.firebaseio.com",
-            "projectId": "facial-recongition-38069",
-            "storageBucket": "facial-recongition-38069.appspot.com",
-            "messagingSenderId": "937313859878",
-            "appId": "1:937313859878:web:25d017bad4c1df1255e9e7"
+            
         }
         self.cred_obj = firebase_admin.credentials.Certificate(
             'C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/facial-recongition-38069-firebase-adminsdk.json')
@@ -27,7 +21,7 @@ class FireBase:
         self.database = pyrebase.initialize_app(self.config)
         self.storage = self.database.storage()
         self.auth = self.database.auth()
-        self.path = "C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/"
+        self.path = ""
 
     #uploads image to firebase storage and updates path of picture1 field for the user
     #automatically increments the picture field and adds the picture
