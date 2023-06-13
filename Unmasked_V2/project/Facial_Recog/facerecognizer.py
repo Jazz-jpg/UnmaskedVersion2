@@ -13,7 +13,7 @@ class FaceRecognizer:
         self.fire = None
         self.path = None
         self.haar_cascade = None
-        self.USERS = r'C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+        self.USERS = r''
         
         self.people = []
     
@@ -46,7 +46,7 @@ class FaceRecognizer:
             
                 
             Detector.capture()
-            imgPath = "C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/my-image.png"
+            imgPath = ""
             img = cv.imread(imgPath)
             name = self.detect(img)
             if name == None:
