@@ -5,8 +5,8 @@ import numpy as np
 import time
 import keyboard
 
-face_cascade = cv2.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_frontalface_alt2.xml')
-profile_cascade = cv2.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/Cascades/data/haarcascade_profileface.xml')
+face_cascade = cv2.CascadeClassifier('')
+profile_cascade = cv2.CascadeClassifier('')
 
 class RectObject:
     def CreateRectangle(self,x1,y1,width,height, frame, color=(255,0,0)):
