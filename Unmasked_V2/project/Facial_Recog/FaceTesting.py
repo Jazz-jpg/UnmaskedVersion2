@@ -11,13 +11,13 @@ import numpy as np
 
 #Utilizing opencv build in facial recognizer
 #make list of people in images manually
-DIR = r'C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/users'
+DIR = r''
 #Base folder
 #DIR = r'C:/Users/PCAero/Desktop/FacialRecognition/TestingFaces'
 #DIR = r'C:/Users/PCAero/Desktop/FacialRecognition/users'
 
 #harr_face classifier 
-haar_cascade = cv.CascadeClassifier('C:/Users/Jazz/Desktop/UnmaskedVersion2/Unmasked_V2/project/Facial_Recog/haar_face.xml')
+haar_cascade = cv.CascadeClassifier('')
 
 #Create function that will loop over every folder and image and add them to the training set
 #For every face there is a name
